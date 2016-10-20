@@ -23,13 +23,20 @@ class ApplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id = null)
+    public function index(Request $request)
     {
-        if ($id) {
-            $lists = Apply::where('distributionId', $id)->orderBy('created_at', 'desc')->paginate($this->pageSize);
-        } else {
-            $lists = Apply::orderBy('created_at', 'desc')->paginate($this->pageSize);
-        }
+        $key = $request->key;
+        $distributionId = $request->input('distributionId');
+
+        $lists = Apply::where(function ($query) use ($key, $distributionId) {
+            if ($distributionId) {
+                $query->where('distributionId', $distributionId);
+            }
+            if ($key) {
+                $query->orWhere('name', 'like', '%' . $key . '%');//名称
+            }
+        })->orderBy('id', 'desc')->paginate($this->pageSize);
+
         return view('manage.apply.index', compact('lists'));
     }
 
@@ -50,7 +57,7 @@ class ApplyController extends Controller
                 $apply->fill($input);
                 $apply->save();
                 if ($apply) {
-                    return redirect('/manage/apply/list')->withSuccess('保存成功！');
+                    return redirect('/manage/apply')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }

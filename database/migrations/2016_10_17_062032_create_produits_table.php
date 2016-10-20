@@ -25,8 +25,9 @@ class CreateProduitsTable extends Migration
             $table->integer('scenicId')->nullable();//景区关联
             $table->string('attention');//注意事项
             $table->text('refundable');//退改规则
-            $table->string('parprice');//票面价
+            $table->float('parprice');//票面价
             $table->float('price');//成本价格
+            $table->float('fixedPrice');//市场限价
             $table->integer('payType')->default(0);//0支持1不支持
             $table->date('beginDate');//开始日期
             $table->date('endDate');//结束日期

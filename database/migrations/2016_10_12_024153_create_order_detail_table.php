@@ -7,13 +7,22 @@ use Illuminate\Database\Migrations\Migration;
 class CreateOrderDetailTable extends Migration
 {
     /**
-     * Run the migrations.
+     * 订单
      *
      * @return void
      */
     public function up()
     {
-        //
+        Schema::create('orderDetail', function (Blueprint $table) {
+            $table->increments('id');
+        
+
+            $table->integer('state')->default(0);//状态0正常，1取消
+            $table->integer('sort')->default(0);//排序
+            $table->text('remark')->nullable();//备注
+            $table->softDeletes();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class CreateOrderDetailTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('orderDetail');
     }
 }

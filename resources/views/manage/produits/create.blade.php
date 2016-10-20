@@ -15,20 +15,20 @@
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/supplier/list')}}">供应商列表</a>
+                                <a href="{{url('/manage/supplier')}}">供应商列表</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/supplier/product/list')}}">原始资源</a>
+                                <a href="{{url('/manage/supplier/product')}}">原始资源</a>
                             </li>
 
                         </ul>
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/scenic/list')}}">景区配置</a>
+                                <a href="{{url('/manage/scenic')}}">景区配置</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/produits/list')}}" class="active">产品中心</a>
+                                <a href="{{url('/manage/produits')}}" class="active">产品中心</a>
                             </li>
 
                         </ul>
@@ -195,6 +195,21 @@
                                             @if ($errors->has('price'))
                                                 <span class="help-block">
                                         <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('fixedPrice') ? ' has-error' : '' }}">
+                                        <label for="fixedPrice" class="col-md-3 control-label">市场限价：</label>
+
+                                        <div class="col-md-9">
+                                            <input id="fixedPrice" type="text" class="form-control" name="fixedPrice"
+                                                   style="width:auto;"
+                                                   value="{{ old('fixedPrice') }}">
+
+                                            @if ($errors->has('fixedPrice'))
+                                                <span class="help-block">
+                                        <strong>{{ $errors->first('fixedPrice') }}</strong>
                                     </span>
                                             @endif
                                         </div>

@@ -15,20 +15,20 @@
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/supplier/list')}}">供应商列表</a>
+                                <a href="{{url('/manage/supplier')}}">供应商列表</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/supplier/product/list')}}">原始资源</a>
+                                <a href="{{url('/manage/supplier/product')}}">原始资源</a>
                             </li>
 
                         </ul>
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/scenic/list')}}">景区配置</a>
+                                <a href="{{url('/manage/scenic')}}">景区配置</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/produits/list')}}" class="active">产品中心</a>
+                                <a href="{{url('/manage/produits')}}" class="active">产品中心</a>
                             </li>
 
                         </ul>
@@ -42,8 +42,8 @@
                         <div class="row">
                             <div class="col-md-4"><a href="{{url('/manage/produits/rule/create')}}"
                                                      class="btn btn-primary">新增</a></div>
-                            <div class="col-md-8">
-                                <form method="get" class="form-horizontal">
+                            <div class="col-md-8 text-right">
+                                <form method="get" class="form-inline">
                                     <div class="input-group">
 
                                         <input type="text" class="form-control" placeholder="关键字"

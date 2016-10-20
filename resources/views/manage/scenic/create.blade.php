@@ -16,20 +16,20 @@
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/supplier/list')}}">供应商列表</a>
+                                <a href="{{url('/manage/supplier')}}">供应商列表</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/supplier/product/list')}}">原始资源</a>
+                                <a href="{{url('/manage/supplier/product')}}">原始资源</a>
                             </li>
 
                         </ul>
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/scenic/list')}}"  class="active">景区配置</a>
+                                <a href="{{url('/manage/scenic')}}"  class="active">景区配置</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/scenic/list')}}">产品中心</a>
+                                <a href="{{url('/manage/scenic')}}">产品中心</a>
                             </li>
 
                         </ul>
@@ -156,7 +156,7 @@
                                         <label for="grade" class="col-md-3 control-label">评级：</label>
 
                                         <div class="col-md-9">
-                                            <select id="grade" name="state" class="form-control" style="width: auto;">
+                                            <select id="grade" name="grade" class="form-control" style="width: auto;">
                                                 <option value="0">未知</option>
                                                 <option value="1">A</option>
                                                 <option value="2">AA</option>

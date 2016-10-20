@@ -22,7 +22,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 短信
      */
     Route::group(['prefix' => 'sms', 'middleware' => 'auth'], function () {
-        Route::get('/list', 'SmsController@index');
+        Route::get('/', 'SmsController@index');
         Route::any('/create', 'SmsController@create');
         Route::any('/edit/{id}', 'SmsController@edit');
         Route::get('/delete', 'SmsController@delete');
@@ -32,7 +32,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 渠道供应
      */
     Route::group(['prefix' => 'supplier', 'middleware' => 'auth'], function () {
-        Route::get('/list', 'SupplierController@index');
+        Route::get('/', 'SupplierController@index');
         Route::any('/create', 'SupplierController@create');
         Route::any('/edit/{id}', 'SupplierController@edit');
         Route::get('/delete', 'SupplierController@delete');
@@ -41,7 +41,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
          * 原始产品管理
          */
         Route::group(['prefix' => 'product', 'middleware' => 'auth'], function () {
-            Route::get('/list/{id?}', 'ProductController@index');
+            Route::get('/', 'ProductController@index');
             Route::any('/create', 'ProductController@create');
             Route::any('/edit/{id}', 'ProductController@edit');
             Route::get('/delete', 'ProductController@delete');
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 景区资料
      */
     Route::group(['prefix' => 'scenic'], function () {
-        Route::get('/list', 'ScenicController@index');
+        Route::get('/', 'ScenicController@index');
         Route::any('/create', 'ScenicController@create');
         Route::any('/edit/{id}', 'ScenicController@edit');
         Route::get('/delete', 'ScenicController@delete');
@@ -64,7 +64,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 产品中心
      */
     Route::group(['prefix' => 'produits'], function () {
-        Route::get('/list/{id?}', 'ProduitsController@index');
+        Route::get('/', 'ProduitsController@index');
         Route::any('/create', 'ProduitsController@create');
         Route::any('/original/{id}', 'ProduitsController@original');
         Route::any('/edit/{id}', 'ProduitsController@edit');
@@ -74,7 +74,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
          * 产品详情
          */
         Route::group(['prefix' => 'details'], function () {
-            Route::get('/list/{id}', 'DetailsController@index');
+            Route::get('/', 'DetailsController@index');
             Route::any('/create', 'DetailsController@create');
             Route::any('/edit/{id}', 'DetailsController@edit');
             Route::get('/delete', 'DetailsController@delete');
@@ -84,7 +84,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
          * 预定规则
          */
         Route::group(['prefix' => 'rule'], function () {
-            Route::get('/list/{id}', 'RuleController@index');
+            Route::get('/', 'RuleController@index');
             Route::any('/create', 'RuleController@create');
             Route::any('/edit/{id}', 'RuleController@edit');
             Route::get('/delete', 'RuleController@delete');
@@ -96,7 +96,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 分销渠道
      */
     Route::group(['prefix' => 'distribution'], function () {
-        Route::get('/list/{id?}', 'DistributionController@index');
+        Route::get('/', 'DistributionController@index');
         Route::any('/create', 'DistributionController@create');
         Route::any('/edit/{id}', 'DistributionController@edit');
         Route::get('/delete', 'DistributionController@delete');
@@ -106,7 +106,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 授信管理
      */
     Route::group(['prefix' => 'credit'], function () {
-        Route::get('/list/{id?}', 'CreditController@index');
+        Route::get('/', 'CreditController@index');
         Route::any('/create/{id?}', 'CreditController@create');
         Route::any('/edit/{id}', 'CreditController@edit');
         Route::get('/delete', 'CreditController@delete');
@@ -116,7 +116,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 授信管理
      */
     Route::group(['prefix' => 'sales'], function () {
-        Route::get('/list/{id?}', 'SalesController@index');
+        Route::get('/', 'SalesController@index');
         Route::any('/create/{id?}', 'SalesController@create');
         Route::any('/edit/{id}', 'SalesController@edit');
         Route::get('/delete', 'SalesController@delete');
@@ -128,7 +128,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 应用管理
      */
     Route::group(['prefix' => 'apply'], function () {
-        Route::get('/list/{id?}', 'ApplyController@index');
+        Route::get('/', 'ApplyController@index');
         Route::any('/create', 'ApplyController@create');
         Route::any('/edit/{id}', 'ApplyController@edit');
         Route::get('/delete', 'ApplyController@delete');
@@ -140,7 +140,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
      * 订单
      */
     Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
-        Route::get('/list', 'OrderController@index');
+        Route::get('/', 'OrderController@index');
         Route::any('/create', 'OrderController@create');
     });
 
@@ -152,47 +152,58 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
  * 微信
  */
 Route::group(['prefix' => 'weixin', 'namespace' => 'Weixin'], function () {
-    Route::get('/list', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
 
 
     /**
      * 会员中心
      */
     Route::group(['prefix' => 'member', 'middleware' => 'auth'], function () {
-        Route::get('/list', 'MemberController@index');
+        Route::get('/', 'MemberController@index');
         Route::any('/create', 'MemberController@create');
-
-
-        /**
-         * 订单管理
-         */
-        Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
-            Route::get('/list', 'OrderController@index');
-            Route::any('/create', 'OrderController@create');
-        });
 
 
         /**
          * 订单
          */
         Route::group(['prefix' => 'pay', 'middleware' => 'auth'], function () {
-            Route::get('/list', 'PayController@index');
+            Route::get('/', 'PayController@index');
             Route::any('/create', 'PayController@create');
         });
     });
+
+
+    /**
+     * 订单管理
+     */
+    Route::group(['prefix' => 'order'], function () {
+        Route::get('/', 'OrderController@index');
+        Route::any('/create', 'OrderController@create');
+    });
+
+    /**
+     * 景区资料
+     */
+    Route::group(['prefix' => 'scenic'], function () {
+        Route::get('/', 'ScenicController@index');
+        Route::any('/create', 'ScenicController@create');
+        Route::any('/edit/{id}', 'ScenicController@edit');
+        Route::get('/delete', 'ScenicController@delete');
+    });
+
 
     /**
      * 产品中心
      */
     Route::group(['prefix' => 'produits'], function () {
-        Route::get('/list', 'ProduitsController@index');
+        Route::get('/', 'ProduitsController@index');
 
         Route::any('/create', 'ProduitsController@create');
         /**
          * 产品详情
          */
         Route::group(['prefix' => 'details'], function () {
-            Route::get('/list/{id}', 'DetailsController@index');
+            Route::get('/', 'DetailsController@index');
 
             Route::any('/create', 'DetailsController@create');
 

@@ -21,13 +21,26 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id = null)
+    public function index(Request $request)
     {
-        if ($id) {
-            $lists = Product::where('supplierId', $id)->orderBy('id', 'desc')->paginate($this->pageSize);
-        } else {
-            $lists = Product::orderBy('id', 'desc')->paginate($this->pageSize);
-        }
+        $key = $request->key;
+        $supplierId = $request->supplierId;
+        $scenicId = $request->scenicId;
+        $lists = Product::where(function ($query) use ($key, $supplierId, $scenicId) {
+            if ($supplierId) {
+                $query->where('supplierId', $supplierId);
+            }
+            if ($scenicId) {
+                $query->where('scenicId', $scenicId);
+            }
+            if ($key) {
+                $query->orWhere('name', 'like', '%' . $key . '%');//商品名称
+                $query->orWhere('attention', 'like', '%' . $key . '%');//注意事项
+                $query->orWhere('parprice', $key);//票面价
+                $query->orWhere('price', $key);//成本价格
+            }
+        })->orderBy('id', 'desc')->paginate($this->pageSize);
+
         return view('manage.supplier.product.index', compact('lists'));
     }
 

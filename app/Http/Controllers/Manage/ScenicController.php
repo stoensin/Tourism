@@ -23,7 +23,13 @@ class ScenicController extends Controller
      */
     public function index(Request $request)
     {
-        $lists = Scenic::orderBy('created_at', 'desc')->paginate($this->pageSize);
+        $key = $request->key;
+        $lists = Scenic::where(function ($query) use ($key) {
+            if ($key) {
+                $query->orWhere('name', 'like', '%' . $key . '%');//名称
+            }
+        })->orderBy('id', 'desc')->paginate($this->pageSize);
+
         return view('manage.scenic.index', compact('lists'));
     }
 
@@ -42,7 +48,7 @@ class ScenicController extends Controller
                 $scenic->fill($input);
                 $scenic->save();
                 if ($scenic) {
-                    return redirect('/manage/scenic/list')->withSuccess('保存成功！');
+                    return redirect('/manage/scenic')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }
@@ -54,4 +60,33 @@ class ScenicController extends Controller
         }
     }
 
+    public function edit($id, Request $request)
+    {
+        try {
+            $scenic = Scenic::find($id);
+            if (!$scenic) {
+                return Redirect::back()->withErrors('数据加载失败！');
+            }
+            if ($request->isMethod('POST')) {
+                $input = $request->all();
+                $validator = Validator::make($input, $scenic->Rules(), $scenic->messages());
+                if ($validator->fails()) {
+                    return redirect('/manage/scenic/create/')
+                        ->withInput()
+                        ->withErrors($validator);
+                }
+                $scenic->fill($input);
+                $scenic->save();
+                if ($scenic) {
+                    return redirect('/manage/scenic')->withSuccess('保存成功！');
+                }
+                return Redirect::back()->withErrors('保存失败！');
+            }
+
+            return view('manage.scenic.edit', compact('scenic'));
+
+        } catch (Exception $ex) {
+            return Redirect::back()->withInput()->withErrors('异常！' . $ex->getMessage());
+        }
+    }
 }

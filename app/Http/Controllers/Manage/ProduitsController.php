@@ -26,8 +26,29 @@ class ProduitsController extends Controller
      */
     public function index(Request $request)
     {
-        $lists = Produits::orderBy('created_at', 'desc')->paginate($this->pageSize);
-        return view('manage.produits.index', compact('lists'));
+        $key = $request->key;
+        $supplierId = $request->supplierId;
+        $scenicId = $request->scenicId;
+        $lists = Produits::where(function ($query) use ($key, $supplierId, $scenicId) {
+            if ($supplierId) {
+                $query->where('supplierId', $supplierId);
+            }
+            if ($scenicId) {
+                $query->where('scenicId', $scenicId);
+            }
+            if ($key) {
+                $query->orWhere('name', 'like', '%' . $key . '%');//商品名称
+                $query->orWhere('attention', 'like', '%' . $key . '%');//注意事项
+                $query->orWhere('refundable', 'like', '%' . $key . '%');//退改规则
+                $query->orWhere('parprice', $key);//票面价
+                $query->orWhere('price', $key);//成本价格
+            }
+        })->orderBy('id', 'desc')->paginate($this->pageSize);
+
+        $suppliers = Supplier::all();
+        $scenics = Scenic::all();
+
+        return view('manage.produits.index', compact('lists', 'suppliers', 'scenics'));
     }
 
     public function create(Request $request)
@@ -47,7 +68,7 @@ class ProduitsController extends Controller
                 $produits->fill($input);
                 $produits->save();
                 if ($produits) {
-                    return redirect('/manage/produits/list')->withSuccess('保存成功！');
+                    return redirect('/manage/produits')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }
@@ -80,7 +101,7 @@ class ProduitsController extends Controller
                 $produits->fill($input);
                 $produits->save();
                 if ($produits) {
-                    return redirect('/manage/produits/list')->withSuccess('保存成功！');
+                    return redirect('/manage/produits')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }

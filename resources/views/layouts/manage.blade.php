@@ -45,8 +45,8 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ url('/manage/supplier/list') }}">资源供应</a></li>
-                    <li><a href="{{ url('/manage/distribution/list') }}">分销渠道</a></li>
+                    <li class="active"><a href="{{ url('/manage/supplier') }}">资源供应</a></li>
+                    <li><a href="{{ url('/manage/distribution') }}">分销渠道</a></li>
                     <li><a href="{{ url('/manage/order') }}">订单管理</a></li>
                     <li><a href="#">结算中心</a></li>
                     <li><a href="#">营销中心</a></li>

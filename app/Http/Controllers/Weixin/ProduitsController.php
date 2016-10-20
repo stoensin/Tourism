@@ -26,7 +26,17 @@ class ProduitsController extends Controller
      */
     public function index(Request $request)
     {
-        $lists = Produits::all();
+        $key = $request->key;
+        $distributionId = $request->input('distributionId');
+
+        $lists = Produits::where(function ($query) use ($key, $distributionId) {
+            if ($distributionId) {
+                $query->where('distributionId', $distributionId);
+            }
+            if ($key) {
+                $query->orWhere('name', 'like', '%' . $key . '%');//名称
+            }
+        })->orderBy('id', 'desc')->paginate($this->pageSize);
         return view('weixin.produits.index', compact('lists'));
     }
 

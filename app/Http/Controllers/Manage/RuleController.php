@@ -25,13 +25,24 @@ class RuleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id, Request $request)
+    public function index(Request $request)
     {
-        $lists = ReserveRule::where('produitsId', $id)->orderBy('created_at', 'desc')->paginate($this->pageSize);
+        $key = $request->key;
+        $produitsid = $request->input('produitsid');
+        $lists = ReserveRule::where(function ($query) use ($key, $produitsid) {
+            if ($key) {
+                $query->orWhere('name', 'like', '%' . $key . '%');//名称
+            }
+            if ($produitsid) {
+                $query->orWhere('produitsid', $produitsid);
+            }
+
+        })->orderBy('id', 'desc')->paginate($this->pageSize);
         return view('manage.produits.rule.index', compact('lists'));
     }
 
-    public function create(Request $request)
+    public
+    function create(Request $request)
     {
         try {
             $rule = new ReserveRule();
@@ -48,7 +59,7 @@ class RuleController extends Controller
                 $rule->fill($input);
                 $rule->save();
                 if ($rule) {
-                    return redirect('/manage/produits/rule/list')->withSuccess('保存成功！');
+                    return redirect('/manage/produits/rule')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }

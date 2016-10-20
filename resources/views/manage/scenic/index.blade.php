@@ -16,20 +16,20 @@
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/supplier/list')}}">供应商列表</a>
+                                <a href="{{url('/manage/supplier')}}">供应商列表</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/supplier/product/list')}}">原始资源</a>
+                                <a href="{{url('/manage/supplier/product')}}">原始资源</a>
                             </li>
 
                         </ul>
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/scenic/list')}}" class="active">景区配置</a>
+                                <a href="{{url('/manage/scenic')}}" class="active">景区配置</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/produits/list')}}">产品中心</a>
+                                <a href="{{url('/manage/produits')}}">产品中心</a>
                             </li>
 
                         </ul>
@@ -43,8 +43,8 @@
                         <div class="row">
                             <div class="col-md-4"><a href="{{url('/manage/scenic/create')}}"
                                                      class="btn btn-primary">新增</a></div>
-                            <div class="col-md-8">
-                                <form method="get" class="form-horizontal">
+                            <div class="col-md-8 text-right">
+                                <form method="get" class="form-inline">
                                     <div class="input-group">
 
                                         <input type="text" class="form-control" placeholder="关键字"
@@ -93,8 +93,11 @@
                                             |
                                             <a href="{{url('/manage/scenic/delete/'.$item->id)}}">删除</a>
                                             <hr/>
-                                            <a href="{{url('/manage/product/list/'.$item->id)}}">原始资源({{$item->product->count()}})</a>
-                                            | <a href="{{url('/manage/produits/list/'.$item->id)}}">产品中心({{$item->produits->count()}})</a>
+                                            <a href="{{url('/manage/supplier/product?scenicId='.$item->id)}}">原始资源({{$item->product->count()}}
+                                                )</a>
+                                            |
+                                            <a href="{{url('/manage/produits?scenicId='.$item->id)}}">产品中心({{$item->produits->count()}}
+                                                )</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -108,7 +111,7 @@
                                         href="{{url('/supplier/resources/guide/create/')}}"
                                         class="btn btn-primary">批量删除</a></div>
                             <div class="col-md-8 text-right">
-                                分页
+                                {!! $lists->links() !!}
                             </div>
                         </div>
 

@@ -15,26 +15,26 @@
                     <div class="panel-body ">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/distribution/list')}}">分销商管理</a>
+                                <a href="{{url('/manage/distribution')}}">分销商管理</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/sales/list')}}">产品授权</a>
+                                <a href="{{url('/manage/sales')}}">产品授权</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/credit/list')}}">授信管理</a>
+                                <a href="{{url('/manage/credit')}}">授信管理</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/apply/list')}}" class="active">应用中心</a>
+                                <a href="{{url('/manage/apply')}}" class="active">应用中心</a>
                             </li>
 
                         </ul>
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/policy/list')}}">默认政策</a>
+                                <a href="{{url('/manage/policy')}}">默认政策</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/special/list')}}">特殊合同</a>
+                                <a href="{{url('/manage/special')}}">特殊合同</a>
                             </li>
 
                         </ul>
@@ -48,8 +48,8 @@
                         <div class="row">
                             <div class="col-md-4"><a href="{{url('/manage/apply/create')}}"
                                                      class="btn btn-primary">新增</a></div>
-                            <div class="col-md-8">
-                                <form method="get" class="form-horizontal">
+                            <div class="col-md-8 text-right">
+                                <form method="get" class="form-inline">
                                     <div class="input-group">
 
                                         <input type="text" class="form-control" placeholder="关键字"

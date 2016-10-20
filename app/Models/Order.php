@@ -13,8 +13,8 @@ class Order extends Model
     protected $primaryKey = "id";//主键
 
     protected $dates = ['deleted_at'];
-    
-    
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,4 +29,54 @@ class Order extends Model
      * @var array
      */
     protected $hidden = [];
+
+    /**
+     * 获取应用到请求的验证规则
+     *
+     * @return array
+     */
+    public function Rules()
+    {
+        return [
+            'name' => 'required|max:255|min:2',
+        ];
+    }
+
+    /**
+     * 获取应用到请求的验证规则
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => '产品名称不能为空',
+        ];
+    }
+
+
+    /**
+     * 分销商
+     */
+    public function distribution()
+    {
+        return $this->belongsTo('App\Models\Distribution', 'distributionId');
+    }
+
+    /**
+     * 所属景区
+     */
+    public function scenic()
+    {
+        return $this->belongsTo('App\Models\Scenic', 'scenicId');
+    }
+
+    /**
+     * 下单人
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'userId');
+    }
+
 }

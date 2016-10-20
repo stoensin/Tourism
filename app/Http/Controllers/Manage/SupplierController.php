@@ -20,7 +20,14 @@ class SupplierController extends Controller
      */
     public function index(Request $request)
     {
-        $lists = Supplier::orderBy('created_at', 'desc')->paginate($this->pageSize);
+        $key = $request->key;
+        $lists = Supplier::where(function ($query) use ($key) {
+            if ($key) {
+                $query->orWhere('name', 'like', '%' . $key . '%');//名称
+            }
+        })->orderBy('id', 'desc')->paginate($this->pageSize);
+
+
         return view('manage.supplier.index', compact('lists'));
     }
 
@@ -45,7 +52,7 @@ class SupplierController extends Controller
                 $supplier->liableId = Base::uid();
                 $supplier->save();
                 if ($supplier) {
-                    return redirect('/manage/supplier/list')->withSuccess('保存成功！');
+                    return redirect('/manage/supplier')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }

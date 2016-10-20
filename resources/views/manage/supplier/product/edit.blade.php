@@ -15,20 +15,20 @@
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/supplier/list')}}">供应商列表</a>
+                                <a href="{{url('/manage/supplier')}}">供应商列表</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/supplier/product/list')}}" class="active">原始资源</a>
+                                <a href="{{url('/manage/supplier/product')}}" class="active">原始资源</a>
                             </li>
 
                         </ul>
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/scenic/list')}}">景区配置</a>
+                                <a href="{{url('/manage/scenic')}}">景区配置</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/product/list')}}">产品中心</a>
+                                <a href="{{url('/manage/product')}}">产品中心</a>
                             </li>
 
                         </ul>

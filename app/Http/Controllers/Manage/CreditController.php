@@ -23,13 +23,22 @@ class CreditController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id = null)
+    public function index(Request $request)
     {
-        if ($id) {
-            $lists = Credit::where('distributionId', $id)->orderBy('created_at', 'desc')->paginate($this->pageSize);
-        } else {
-            $lists = Credit::orderBy('created_at', 'desc')->paginate($this->pageSize);
-        }
+
+        $key = $request->key;
+        $distributionId = $request->input('distributionId');
+
+        $lists = Credit::where(function ($query) use ($key, $distributionId) {
+            if ($distributionId) {
+                $query->where('distributionId', $distributionId);
+            }
+            if ($key) {
+                $query->orWhere('name', 'like', '%' . $key . '%');//名称
+            }
+        })->orderBy('id', 'desc')->paginate($this->pageSize);
+        
+         
         return view('manage.credit.index', compact('lists'));
     }
 
@@ -50,7 +59,7 @@ class CreditController extends Controller
                 $credit->fill($input);
                 $credit->save();
                 if ($credit) {
-                    return redirect('/manage/credit/list')->withSuccess('保存成功！');
+                    return redirect('/manage/credit')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }
