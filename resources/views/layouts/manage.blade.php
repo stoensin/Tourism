@@ -19,10 +19,12 @@
                 'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
 </head>
 <body>
 <div id="manage">
-    <nav class="navbar navbar-default navbar-static-top" >
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
             <div class="navbar-header">
 
@@ -47,10 +49,9 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ url('/manage/supplier') }}">资源供应</a></li>
                     <li><a href="{{ url('/manage/distribution') }}">分销渠道</a></li>
-                    <li><a href="{{ url('/manage/order') }}">订单管理</a></li>
-                    <li><a href="#">结算中心</a></li>
-                    <li><a href="#">营销中心</a></li>
-                    <li><a href="#">用户管理</a></li>
+                    <li><a href="{{ url('/manage/member') }}">会员中心</a></li>
+                    <li><a href="#">财务结算</a></li>
+                    <li><a href="#">动态营销</a></li>
                     <li><a href="#">系统参数</a></li>
                 </ul>
 
@@ -90,7 +91,6 @@
     @yield('content')
 </div>
 
-<!-- Scripts -->
-<script src="/js/app.js"></script>
+
 </body>
 </html>

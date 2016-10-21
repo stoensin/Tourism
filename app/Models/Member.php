@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Order extends Model
+class Member extends Model
 {
     use SoftDeletes;
 
-    protected $table = "order";
+
+    protected $table = "member";
     protected $primaryKey = "id";//主键
 
     protected $dates = ['deleted_at'];
-
-
     /**
      * The attributes that are mass assignable.
      *
@@ -30,6 +29,7 @@ class Order extends Model
      */
     protected $hidden = [];
 
+
     /**
      * 获取应用到请求的验证规则
      *
@@ -38,7 +38,7 @@ class Order extends Model
     public function Rules()
     {
         return [
-            // 'name' => 'required|max:255|min:2',
+            'name' => 'required|max:255|min:2',
         ];
     }
 
@@ -50,21 +50,12 @@ class Order extends Model
     public function messages()
     {
         return [
-            //'name.required' => '产品名称不能为空',
+            'name.required' => '姓名',
         ];
     }
 
-
     /**
-     * 合计金额
-     */
-    public function total()
-    {
-        return $this->quantity * $this->price;
-    }
-
-    /**
-     * 分销商
+     * 所属分销商
      */
     public function distribution()
     {
@@ -72,28 +63,11 @@ class Order extends Model
     }
 
     /**
-     * 所属景区
+     * 推荐人
      */
-    public function scenic()
+    public function parentMember()
     {
-        return $this->belongsTo('App\Models\Scenic', 'scenicId');
-    }
-
-    /**
-     * 价格项
-     */
-    public function produits()
-    {
-        return $this->belongsTo('App\Models\Produits', 'produitsId');
-    }
-
-
-    /**
-     * 下单人
-     */
-    public function member()
-    {
-        return $this->belongsTo('App\Models\Member', 'memberId');
+        return $this->belongsTo('App\Models\Member', 'parentId');
     }
 
 }

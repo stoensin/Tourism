@@ -19,11 +19,11 @@ class CreateOrderTable extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->integer('distributionId');//分销商
             $table->integer('scenicId');//所属景区
             $table->integer('produitsId');//价格项
-            $table->integer('userId');//用户ID
-            $table->string('name');//产品名称
+            $table->integer('memberId')->nullable();//会员ID
             $table->date('ticketDate');//票面日期
             $table->integer('isExpress')->default(1);//是否需要快递0需要，1不需要
             $table->float('price');//单价
@@ -36,9 +36,6 @@ class CreateOrderTable extends Migration
             $table->string('email');//邮箱
             $table->string('addres');//地址
 
-            $table->date('orderDate');//下单时间
-            $table->date('payDate');//支付时间
-
             $table->string('consumeCode');//消费码
 
             $table->integer('auditState')->default(0);//订单审核状态0审核通过1待审核2拒绝
@@ -46,7 +43,7 @@ class CreateOrderTable extends Migration
             $table->integer('payState')->default(1);//支付状态0支付成功，1待支付，2已支付待审核，3支付失败，4退款中，5已退款
             $table->integer('paymentId')->nullable();//付款记录
             $table->text('operationLog')->nullable();//操作日志
-
+            $table->integer('source')->default(0);//订单来源0分销平台1微信2电商
 
             $table->integer('state')->default(0);//状态0正常，1取消
             $table->integer('sort')->default(0);//排序

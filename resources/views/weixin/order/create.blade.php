@@ -51,32 +51,35 @@
                     <div class="weui-cells weui-cells_form">
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <a class="weui-btn weui-btn_mini weui-btn_warn" href="javascript:">明天</a>
-                                <a class="weui-btn weui-btn_mini weui-btn_primary" href="javascript:">10-19</a>
-                                <a class="weui-btn weui-btn_mini weui-btn_primary" href="javascript:">10-20</a>
-                                <a class="weui-btn weui-btn_mini weui-btn_primary" href="javascript:">10-20</a>
+                                <a class="weui-btn weui-btn_mini weui-btn_warn" href="javascript:setData('2016-10-19')">明天</a>
+                                <a class="weui-btn weui-btn_mini weui-btn_primary"
+                                   href="javascript:setData('2016-10-19')">10-19</a>
+                                <a class="weui-btn weui-btn_mini weui-btn_primary"
+                                   href="javascript:setData('2016-10-20')">10-20</a>
+                                <a class="weui-btn weui-btn_mini weui-btn_primary"
+                                   href="javascript:setData('2016-10-21')">10-21</a>
                                 <a class="weui-btn weui-btn_mini weui-btn_primary" href="javascript:">更多</a>
                             </div>
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd"><label for="" class="weui-label">日期</label></div>
-                            <div class="weui-cell__bd">
-                                <input class="weui-input" type="date" value="2016-12-20">
+                            <div class="weui-cell__bd text-right">
+                                <input class="weui-input" type="date" value="2016-12-20" id="ydDate"    style="text-align: center">
                             </div>
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd"><label class="weui-label">数量</label></div>
-                            <div class="weui-cell__bd">
-                                <div class="weui-flex">
-                                    <div class="weui-flex__item">
-                                        <div id="reduce">-</div>
-                                    </div>
-                                    <div class="weui-flex__item">
-                                        <div id="quantity">1</div>
-                                    </div>
-                                    <div class="weui-flex__item">
-                                        <div id="add" class="add">+</div>
-                                    </div>
+                            <div class="weui-cell__bd" style="text-align: right">
+                                <div class="weui_cell_ft text-right">
+                                    <a class="weui-btn weui-btn_mini weui-btn_default" id="reduce"
+                                       href="javascript:js(false)"
+                                       style="width: 30px;display: inline-block; text-align: center">-</a>
+                                    <input class="weui-input" id="quantity" type="number" pattern="[0-9]*" value="1"
+                                           style="width:30px;text-align: center;" disabled>
+                                    <a class="weui-btn weui-btn_mini weui-btn_default" id="add" class="add"
+                                       href="javascript:js(true)"
+                                       style="width: 30px;display: inline-block; text-align: center">+</a>
+
                                 </div>
                             </div>
                         </div>
@@ -132,6 +135,29 @@
             </div>
         </form>
         <script type="text/javascript">
+            function js(isAdd) {
+                var total = $("#total");
+                var quantity = $("#quantity");
+                var fixedPrice = $("#fixedPrice");
+                var quantityVal = quantity.val();
+                if (isAdd) {
+                    quantityVal++;
+                } else {
+                    quantityVal--;
+                }
+
+                var fixedPriceVal = fixedPrice.text();
+                var totalVal = fixedPrice.text();
+                if (quantityVal > 0) {
+                    quantity.val(quantityVal);
+                    total.text(quantityVal * fixedPriceVal);
+                }
+            }
+
+            function setData(_date) {
+                var ydDate = $("#ydDate");
+                ydDate.val(_date);
+            }
             $(function () {
                 var winH = $(window).height();
                 var $toast = $('#toast');
@@ -143,10 +169,12 @@
                         $toast.fadeOut(100);
                     }, 2000);
                 });
-                $('.add').on('click', function () {
-                    var id = $(this).data('id');
-                    alert('id');
-                });
+//                $('.add').on('click', function () {
+//                    var quantity = $("#quantity");
+//                    var val = quantity.text();
+//                    val++;
+//                    quantity.text(val);
+//                });
 
                 $('.js_item').on('click', function () {
                     var id = $(this).data('id');

@@ -288,7 +288,7 @@ ul {
     box-sizing: border-box;
     -webkit-transition: .5s;
     transition: .5s;
-    background: url(images/layers/transparent.gif) no-repeat 50%;
+    /*background: url(images/layers/transparent.gif) no-repeat 50%;*/
     background-size: contain;
     font-size: 14px;
     color: #fff
@@ -351,7 +351,7 @@ ul {
 
 .page.layers .layers__layer_popout.j_pic {
     border-color: transparent;
-    background-image: url(images/layers/popout.png)
+    /*background-image: url(images/layers/popout.png)*/
 }
 
 .page.layers .layers__layer_mask {
@@ -390,7 +390,7 @@ ul {
 
 .page.layers .layers__layer_navigation.j_pic {
     background-color: transparent;
-    background-image: url(images/layers/navigation.png)
+    /*background-image: url(images/layers/navigation.png)*/
 }
 
 .page.layers .layers__layer_content {
@@ -411,7 +411,6 @@ ul {
 }
 
 .page.layers .layers__layer_content.j_pic {
-    background-image: url(images/layers/content.png)
 }
 
 .page.searchbar .searchbar-result {
@@ -489,4 +488,16 @@ ul {
 .page.slideOut {
     -webkit-animation: b .2s forwards;
     animation: b .2s forwards
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
 }

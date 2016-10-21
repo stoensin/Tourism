@@ -15,9 +15,10 @@ class CreateDistributionTable extends Migration
     {
         Schema::create('distribution', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('userId')->nullable();//关联用户
+            $table->string('userName')->unique();//用户名
+            $table->string('passWord')->nullable();//密码
             $table->string('name');//企业名称
-            $table->string('legalPerson')->nullable();;//法人
+            $table->string('legalPerson')->nullable();//法人
             $table->string('idCard')->nullable();//身份证号
             $table->date('birthday')->nullable();//生日
             $table->string('province')->nullable();//省

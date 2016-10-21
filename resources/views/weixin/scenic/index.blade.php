@@ -31,27 +31,23 @@
                         </div>
                     </div>
                     <div class="weui-panel weui-panel_access">
-                        <div class="weui-panel__hd"><h4 class="weui-media-box__title">{{$item->name}}</h4></div>
-                        <div class="weui-panel__bd">
-                            <div class="weui-media-box weui-media-box_text">
-                                @if(isset($item->attention))
-                                    <p class="weui-media-box__desc">{{$item->attention}}</p>
-                                @endif
-                                <ul class="weui-media-box__info">
-                                    <li class="weui-media-box__info__meta">{{$item->grade}}星</li>
-                                    @if(isset($item->recommend))
-                                        <li class="weui-media-box__info__meta">{{$item->recommend}}</li>
-                                    @endif
-                                    @if(isset($item->attention))
-                                        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{$item->attention}}</li>
-                                    @endif
-                                </ul>
-                            </div>
+                        <div class="weui-panel__hd"><h4
+                                    class="weui-media-box__title">{{$item->name}}</h4>{{$item->grade}}星
                         </div>
-                    </div>
-                    <div class="weui-panel weui-panel_access">
-                        <div class="weui-panel__hd">价格项</div>
                         <div class="weui-panel__bd">
+
+                            <div class="weui-media-box weui-media-box_text">
+
+                                <p class="weui-media-box__desc">
+                                    @if(isset($item->attention))
+                                        {{$item->attention}}
+                                    @endif
+                                    @if(isset($item->recommend))
+                                        {{$item->recommend}}
+                                    @endif
+                                </p>
+
+                            </div>
                             <div class="weui-media-box weui-media-box_small-appmsg">
                                 <div class="weui-cells">
                                     @if(isset($item->produits))
@@ -59,22 +55,18 @@
                                             <a class="weui-cell weui-cell_access"
                                                href="{{url('/weixin/order/create?pid='.$proItem->id.'&did=1')}}">
                                                 <div class="weui-cell__bd weui-cell_primary">
-                                                    <p>{{$proItem->name}}</p>{{$proItem->fixedPrice}}元
+                                                    <p>{{$proItem->name}}</p>
                                                 </div>
-                                                <span class="weui-cell__ft">预定</span>
+                                                <span class="weui-cell__ft">{{$proItem->fixedPrice}}元</span>
                                             </a>
                                         @endforeach
                                     @endif
                                 </div>
                             </div>
                         </div>
-                        <div class="weui-panel__ft">
-                            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
-                                <div class="weui-cell__bd">查看更多</div>
-                                <span class="weui-cell__ft"></span>
-                            </a>
-                        </div>
+
                     </div>
+
                 @endforeach
             </div>
             <div class="page__ft">

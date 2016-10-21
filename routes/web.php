@@ -137,11 +137,24 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
 
 
     /**
-     * 订单
+     * 会员中心
      */
-    Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
-        Route::get('/', 'OrderController@index');
-        Route::any('/create', 'OrderController@create');
+    Route::group(['prefix' => 'member', 'middleware' => 'auth'], function () {
+        Route::get('/', 'MemberController@index');
+        Route::any('/create', 'MemberController@create');
+
+
+        /**
+         * 订单
+         */
+        Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
+            Route::get('/', 'OrderController@index');
+            Route::any('/create', 'OrderController@create');
+            Route::post('/scenic', 'OrderController@scenic');
+
+
+        });
+
     });
 
 
