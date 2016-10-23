@@ -234,6 +234,7 @@
 
                                             <div class="col-md-9">
                                                 <select name="distributionId" class="form-control" style="width: auto;">
+                                                    <option value="">请选择分销商</option>
                                                     @foreach($distributions as $item)
                                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                                     @endforeach
@@ -338,9 +339,14 @@
                     success: function (data) {
                         produitList = data;
                         $("#produitsId").empty();
-                        $("#produitsId").append("<option value=''>请选择价格项</option>");
-                        for (i = 0; i < data.length; i++) {
-                            $("#produitsId").append("<option value='" + data[i].id + "'>" + data[i].name + "（" + data[i].price + "元）</option>");
+
+                        if (produitList.length > 0) {
+                            $("#produitsId").append("<option value=''>请选择价格项</option>");
+                            for (i = 0; i < data.length; i++) {
+                                $("#produitsId").append("<option value='" + data[i].id + "'>" + data[i].name + "（" + data[i].price + "元）</option>");
+                            }
+                        } else {
+                            $("#produitsId").append("<option value=''>未查询到相关价格项</option>");
                         }
                     },
                     error: function (XHR, textStatus, errorThrown) {

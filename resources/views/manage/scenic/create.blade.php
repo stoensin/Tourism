@@ -26,7 +26,7 @@
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/scenic')}}"  class="active">景区配置</a>
+                                <a href="{{url('/manage/scenic')}}" class="active">景区配置</a>
                             </li>
                             <li>
                                 <a href="{{url('/manage/scenic')}}">产品中心</a>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-10">
                 <div class="panel panel-default">
-                    <form class="form-horizontal" role="form" method="POST">
+                    <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-2  text-left">
@@ -90,8 +90,8 @@
                                         <label for="titlePic" class="col-md-3 control-label">标题图片：</label>
 
                                         <div class="col-md-9">
-                                            <input id="titlePic" type="text" class="form-control" name="titlePic"
-                                                   value="{{ old('titlePic') }}">
+                                            <input id="titlePic" type="file" name="titlePic"
+                                            >
 
                                             @if ($errors->has('titlePic'))
                                                 <span class="help-block">

@@ -19,8 +19,8 @@ class Distribution extends Model
      *
      * @var array
      */
-    protected $fillable = [];
-    protected $guarded = ['_token'];
+    protected $fillable = ['name', 'mobile', 'email', 'password', 'idCard', 'birthday', 'sex', 'province', 'city', 'addres', 'tel', 'qq', 'weibo', 'weixin', 'distributionId', 'memberId', 'state', 'remark', 'updated_at', 'created_at'];
+    protected $guarded = ['_token','updated_at', 'created_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -39,9 +39,6 @@ class Distribution extends Model
     {
         return [
             'name' => 'required|max:255|min:2',
-            'credit' => 'required',
-            'warningCredit' => 'required',
-            'name' => 'required',
         ];
     }
 
@@ -53,9 +50,6 @@ class Distribution extends Model
     public function messages()
     {
         return [
-            'name.required' => '企业不能为空',
-            'credit.required' => '信用额度不能为空',
-            'warningCredit.required' => '预警额度不能为空',
             'name.required' => '企业不能为空',
         ];
     }

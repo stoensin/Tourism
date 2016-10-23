@@ -6,6 +6,17 @@ php artisan make:controller ArticleController 创建控制器
 php artisan make:provider RiakServiceProvider 编写服务提供者
 php artisan make:model Models/Task 创建模型
 
+
+mac Apache重启
+sudo /usr/sbin/apachectl restart
+
+
+//环境更新
+composer update
+
+//加载自定义模型
+composer dumpautoload
+
 //获取输入数据，不用担心所使用的HTTP方法
 $id = Input::get('id');
 

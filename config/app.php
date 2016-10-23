@@ -182,6 +182,8 @@ return [
         App\Providers\CommonServiceProvider::class,
         App\Providers\SmsServiceProvider::class,
         App\Providers\QianfanServiceProvider::class,
+
+        zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,//七牛
     ],
 
     /*
@@ -229,6 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+
 
 
         'Common' => App\Http\Facades\Common::class,

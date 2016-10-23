@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Manage;
 use App\Http\Controllers\Controller;
 use App\Models\Scenic;
 use Exception;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use zgldh\QiniuStorage\QiniuStorage;
 
 /**
  * 景区配置
@@ -25,6 +28,7 @@ class ScenicController extends Controller
     {
         $key = $request->key;
         $lists = Scenic::where(function ($query) use ($key) {
+
             if ($key) {
                 $query->orWhere('name', 'like', '%' . $key . '%');//名称
             }
@@ -37,6 +41,7 @@ class ScenicController extends Controller
     {
         try {
             $scenic = new Scenic();
+
             if ($request->isMethod('POST')) {
                 $input = $request->all();
                 $validator = Validator::make($input, $scenic->Rules(), $scenic->messages());
@@ -45,7 +50,27 @@ class ScenicController extends Controller
                         ->withInput()
                         ->withErrors($validator);
                 }
+
+
                 $scenic->fill($input);
+                if ($request->hasFile('titlePic')) {
+
+                    $pathName=$request->titlePic->store('scenic');
+
+//
+//                    $disk = Storage::disk('qiniu');
+//
+//
+//
+//                    $pathName = $disk->put('scenic', $request->file('titlePic'));
+//
+                    if ($pathName) {
+//                        $picUrl = $disk->imagePreviewUrl($pathName, 'imageView2/0/w/100/h/200');
+
+                        $scenic->titlePic = $pathName;
+                    }
+                }
+
                 $scenic->save();
                 if ($scenic) {
                     return redirect('/manage/scenic')->withSuccess('保存成功！');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Service;
 
-use App\Models\System\BaseType;
+use App\Models\Config;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -18,7 +18,7 @@ class BaseService
     {
         if (Auth::check()) {
             if ($this->config == null) {
-//               / $this->config = $this->enterprise->config;
+                $this->config = Config::first();
             }
             if ($this->user == null) {
                 $this->user = Auth::user();

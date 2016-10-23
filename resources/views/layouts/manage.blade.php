@@ -39,8 +39,7 @@
 
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('/') }}">{{Base::config('name')}}
                 </a>
             </div>
 
@@ -52,7 +51,7 @@
                     <li><a href="{{ url('/manage/member') }}">会员中心</a></li>
                     <li><a href="#">财务结算</a></li>
                     <li><a href="#">动态营销</a></li>
-                    <li><a href="#">系统参数</a></li>
+                    <li><a href="{{ url('/manage/config') }}">系统配置</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -89,6 +88,15 @@
     </nav>
 
     @yield('content')
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <hr/>
+            {{Base::config('enterprise')}}<br/>
+            {{Base::config('name')}}
+        </div>
+
+    </div>
 </div>
 
 

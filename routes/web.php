@@ -11,6 +11,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::any('/install', 'InstallController@index');
+
+
+
 /**
  * 管理后台
  */
@@ -151,6 +154,27 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth', 'namespace' => 'Mana
             Route::get('/', 'OrderController@index');
             Route::any('/create', 'OrderController@create');
             Route::post('/scenic', 'OrderController@scenic');
+
+
+        });
+
+    });
+
+
+    /**
+     * 系统配置
+     */
+    Route::group(['prefix' => 'config', 'middleware' => 'auth'], function () {
+        Route::any('/', 'ConfigController@index');
+
+
+        /**
+         * 基础数据
+         */
+        Route::group(['prefix' => 'base', 'middleware' => 'auth'], function () {
+            Route::get('/', 'BaseDataController@index');
+            Route::any('/create', 'BaseDataController@create');
+            Route::post('/scenic', 'BaseDataController@scenic');
 
 
         });

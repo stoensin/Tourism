@@ -173,7 +173,7 @@ class ProductController extends Controller
             if (isset($request->json)) {
                 return Response::json($data);
             }
-            return redirect('/manage/supplier/product/list/' . $id)->withSuccess('同步成功！');
+            return redirect('/manage/supplier/product/' . $id)->withSuccess('同步成功！');
         } catch (Exception $ex) {
 
             return Redirect::back()->withInput()->withErrors('异常！' . $ex->getMessage());

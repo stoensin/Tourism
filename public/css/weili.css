@@ -72,7 +72,8 @@ hr {
 span {
     font-family: Arial, 微软雅黑, 黑体;
 }
-
+.auto{
+    width:auto;}
 .navbar-static-top {
     color: #ffffff;
 }

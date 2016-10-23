@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => 'qiniu',
 
     /*
     |--------------------------------------------------------------------------
@@ -61,7 +61,18 @@ return [
             'region' => 'your-region',
             'bucket' => 'your-bucket',
         ],
-
+        'qiniu' => [
+            'driver' => 'qiniu',
+            'domains' => [
+                'default' => 'cdn.4255.cn', //你的七牛域名env('APP_LOG', 'single')
+                'https' => 'cdn.4255.cn',         //你的HTTPS域名
+                'custom' => 'cdn.4255.cn',     //你的自定义域名
+            ],
+            'access_key' => 'hexBRHOH4YjkHohx8k7d_gnx1Zj5q0Or-0BDE8Kb',  //AccessKey
+            'secret_key' => 'sK2lp5_1bTd8Qkhh7xSXj2ZC6f1WaD6Km7CjJixa',  //SecretKey
+            'bucket' => 'weiliwang',  //Bucket名字
+            'notify_url' => 'http://oa4ykfuon.bkt.clouddn.com',  //持久化处理回调地址
+        ],
     ],
 
 ];
