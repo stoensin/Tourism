@@ -26,10 +26,10 @@
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/scenic')}}"  class="active">景区配置</a>
+                                <a href="{{url('/manage/supplier/scenic')}}"  class="active">景区配置</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/scenic')}}">产品中心</a>
+                                <a href="{{url('/manage/supplier/scenic')}}">产品中心</a>
                             </li>
 
                         </ul>

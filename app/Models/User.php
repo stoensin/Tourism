@@ -18,8 +18,35 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'type', 'state',
     ];
+
+    /**
+     * 获取应用到请求的验证规则
+     *
+     * @return array
+     */
+    public function Rules()
+    {
+        return [
+            'name' => 'required|max:255|min:2',
+            'email' => 'required|max:255|min:2',
+        ];
+    }
+
+    /**
+     * 获取应用到请求的验证规则
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => '用户名不能为空',
+            'email.required' => '邮箱不能为空',
+        ];
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

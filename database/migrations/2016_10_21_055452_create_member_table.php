@@ -16,9 +16,9 @@ class CreateMemberTable extends Migration
         Schema::create('member', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('mobile')->unique();//手机号
-            $table->string('password');
+            $table->integer('userId')->nullable();//用户关联
+            $table->string('email')->nullable();
+            $table->string('mobile')->nullable();//手机号
             $table->string('idCard')->nullable();//身份证号
             $table->date('birthday')->nullable();//生日
             $table->integer('sex')->default(0);//性别(0未知、1男、2女)
@@ -35,7 +35,6 @@ class CreateMemberTable extends Migration
             $table->integer('state')->default(0);//状态
             $table->integer('sort')->default(0);//排序
             $table->text('remark')->nullable();//备注
-            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });

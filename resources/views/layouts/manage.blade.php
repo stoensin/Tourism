@@ -49,9 +49,9 @@
                     <li class="active"><a href="{{ url('/manage/supplier') }}">资源供应</a></li>
                     <li><a href="{{ url('/manage/distribution') }}">分销渠道</a></li>
                     <li><a href="{{ url('/manage/member') }}">会员中心</a></li>
-                    <li><a href="#">财务结算</a></li>
-                    <li><a href="#">动态营销</a></li>
-                    <li><a href="{{ url('/manage/config') }}">系统配置</a></li>
+                    <li><a href="{{ url('/manage/finance') }}">财务结算</a></li>
+                    <li><a href="{{ url('/manage/marketing') }}">动态营销</a></li>
+                    <li><a href="{{ url('/manage/system') }}">系统配置</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -64,7 +64,18 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->name }}（ @if(Auth::user()->type==0)
+                                    系统用户
+                                @elseif(Auth::user()->type==1)
+                                    普通用户
+                                @elseif(Auth::user()->type==2)
+                                    供应商
+                                @elseif(Auth::user()->type==3)
+                                    分销商
+                                @else
+                                    会员
+                                @endif）
+                                <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -88,14 +99,15 @@
     </nav>
 
     @yield('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <hr/>
+                {{Base::config('enterprise')}} @2010-2016
 
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <hr/>
-            {{Base::config('enterprise')}}<br/>
-            {{Base::config('name')}}
+            </div>
+
         </div>
-
     </div>
 </div>
 
