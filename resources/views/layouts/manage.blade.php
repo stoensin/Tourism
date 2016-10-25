@@ -51,6 +51,7 @@
                     <li><a href="{{ url('/manage/member') }}">会员中心</a></li>
                     <li><a href="{{ url('/manage/finance') }}">财务结算</a></li>
                     <li><a href="{{ url('/manage/marketing') }}">动态营销</a></li>
+                    <li><a href="{{ url('/manage/open') }}">开放平台</a></li>
                     <li><a href="{{ url('/manage/system') }}">系统配置</a></li>
                 </ul>
 

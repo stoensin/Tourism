@@ -18,13 +18,7 @@
                                 <a href="{{url('/manage/distribution')}}">分销商管理</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/distribution/sales')}}">产品授权</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/credit')}}" class="active">授信管理</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/apply')}}">应用中心</a>
+                                <a href="{{url('/manage/distribution/sales')}}" class="active">产品授权</a>
                             </li>
 
                         </ul>
@@ -81,22 +75,26 @@
                                         </div>
                                     @endif
 
+                                    @if($produits)
+                                        <div class="form-group{{ $errors->has('produitsId') ? ' has-error' : '' }}">
+                                            <label for="produitsId" class="col-md-3 control-label">授权产品：</label>
 
-                                    <div class="form-group{{ $errors->has('credit') ? ' has-error' : '' }}">
-                                        <label for="credit" class="col-md-3 control-label">授信金额：</label>
+                                            <div class="col-md-9">
+                                                <select id="produitsId" name="produitsId" class="form-control"
+                                                        style="width: auto;">
+                                                    @foreach($produits as $item)
+                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endforeach
+                                                </select>
 
-                                        <div class="col-md-9">
-                                            <input id="credit" type="text" class="form-control" name="credit"
-                                                   style="width: auto;"
-                                                   value="{{ old('credit') }}">
-
-                                            @if ($errors->has('credit'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('credit') }}</strong>
+                                                @if ($errors->has('produitsId'))
+                                                    <span class="help-block">
+                                        <strong>{{ $errors->first('produitsId') }}</strong>
                                     </span>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                     <div class="form-group{{ $errors->has('beginDate') ? ' has-error' : '' }}">
                                         <label for="beginDate" class="col-md-3 control-label">开始日期：</label>
@@ -132,15 +130,13 @@
 
                                     @if($users)
                                         <div class="form-group{{ $errors->has('liableId') ? ' has-error' : '' }}">
-                                            <label for="liableId" class="col-md-3 control-label">责任人：</label>
+                                            <label for="liableId" class="col-md-3 control-label">授权人：</label>
 
                                             <div class="col-md-9">
                                                 <select name="liableId" class="form-control" style="width: auto;">
-                                                    <option value="">请选择责任人</option>
                                                     @foreach($users as $item)
                                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                                     @endforeach
-
                                                 </select>
 
                                                 @if ($errors->has('liableId'))

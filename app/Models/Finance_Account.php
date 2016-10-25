@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Credit extends Model
+class Finance_Account extends Model
 {
     use SoftDeletes;
 
 
-    protected $table = "credit";
+    protected $table = "Finance_Account";
     protected $primaryKey = "id";//主键
 
     protected $dates = ['deleted_at'];
@@ -38,7 +38,7 @@ class Credit extends Model
     public function Rules()
     {
         return [
-//            'credit' => 'required|max:255|min:2',
+            'name' => 'required|max:255|min:2',
         ];
     }
 
@@ -50,24 +50,26 @@ class Credit extends Model
     public function messages()
     {
         return [
-//            'credit.required' => '额度金额不能为空',
+            'name.required' => '开户名不能为空',
         ];
     }
 
-    /**
-     * 分销商
-     */
-    public function distribution()
+    public function getBalanceAttribute()
     {
-        return $this->belongsTo('App\Models\Distribution', 'distributionId');
+        $lists = $this->payments()->where('reviewed', 0)->where('state', 0);
+
+
+        return $lists->where('type', 0)->sum('money') - $lists->where('type', 1)->sum('money') + $this->beginMoney;
     }
 
+
     /**
-     * 责任人
+     *支付明细
      */
-    public function liableUser()
+    public function payments()
     {
-        return $this->belongsTo('App\Models\User', 'liableId');
+        return $this->hasMany('App\Models\Finance_Payments', "accountId");
     }
+
 
 }

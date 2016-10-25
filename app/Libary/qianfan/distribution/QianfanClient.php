@@ -36,7 +36,7 @@ class QianfanClient
     /**
      * 获取可销售产品
      */
-    public function getProducts()
+    public function getResources()
     {
         $url = "http://fxpt.1000fun.com:8082/ticket-web-service/services/productsmsg?wsdl";
         $soap = new SoapClient($url);

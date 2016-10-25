@@ -12,14 +12,13 @@
             <div class="col-md-2">
                 <div class="panel panel-primary">
                     <div class="panel-heading">资源供应</div>
-
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/supplier')}}">供应商列表</a>
+                                <a href="{{url('/manage/supplier')}}">供应商</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/supplier/product')}}">原始资源</a>
+                                <a href="{{url('/manage/supplier/resource')}}">产品资源</a>
                             </li>
 
                         </ul>
@@ -28,10 +27,6 @@
                             <li>
                                 <a href="{{url('/manage/supplier/scenic')}}" class="active">景区配置</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/supplier/scenic')}}">产品中心</a>
-                            </li>
-
                         </ul>
                     </div>
                 </div>
@@ -187,6 +182,55 @@
                                             @if ($errors->has('tel'))
                                                 <span class="help-block">
                                         <strong>{{ $errors->first('tel') }}</strong>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group{{ $errors->has('openingTime') ? ' has-error' : '' }}">
+                                        <label for="openingTime" class="col-md-3 control-label">开放时间：</label>
+
+                                        <div class="col-md-9">
+                                            <input id="openingTime" type="text" class="form-control"
+                                                   name="openingTime"
+                                                   style="width: auto;"
+                                                   value="{{ old('openingTime') }}" autofocus>
+
+                                            @if ($errors->has('tel'))
+                                                <span class="help-block">
+                                        <strong>{{ $errors->first('openingTime') }}</strong>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('province') ? ' has-error' : '' }}">
+                                        <label for="province" class="col-md-3 control-label">所在省：</label>
+
+                                        <div class="col-md-9">
+                                            <input id="province" type="text" class="form-control"
+                                                   name="province"
+                                                   style="width: auto;"
+                                                   value="{{ old('province') }}" autofocus>
+
+                                            @if ($errors->has('province'))
+                                                <span class="help-block">
+                                        <strong>{{ $errors->first('province') }}</strong>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                                        <label for="city" class="col-md-3 control-label">所在市：</label>
+
+                                        <div class="col-md-9">
+                                            <input id="city" type="text" class="form-control"
+                                                   name="city"
+                                                   style="width: auto;"
+                                                   value="{{ old('city') }}" autofocus>
+
+                                            @if ($errors->has('city'))
+                                                <span class="help-block">
+                                        <strong>{{ $errors->first('city') }}</strong>
                                     </span>
                                             @endif
                                         </div>

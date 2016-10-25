@@ -5,39 +5,29 @@
         <ol class="breadcrumb">
             <li><a href="#">微利分销</a></li>
             <li><a href="#">管理中心</a></li>
-            <li class="active">分销渠道</li>
+            <li class="active">财务结算</li>
         </ol>
         <div class="row">
             <div class="col-md-2">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">分销渠道</div>
+                    <div class="panel-heading">财务结算</div>
 
                     <div class="panel-body ">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/distribution')}}">分销商管理</a>
+                                <a href="{{url('/manage/finance/account')}}" class="active">帐户设置</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/distribution/sales')}}">产品授权</a>
+                                <a href="{{url('/manage/finance/payments')}}">收支记录</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/credit')}}" class="active">授信管理</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/apply')}}">应用中心</a>
-                            </li>
-
                         </ul>
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/distribution/policy')}}">默认政策</a>
+                                <a href="{{url('/manage/finance/credit')}}">授信管理</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/special')}}">特殊合同</a>
-                            </li>
-
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -61,29 +51,29 @@
                                 <fieldset>
                                     <legend>基本信息</legend>
                                     {!! csrf_field() !!}
-                                    @if($distributions )
-                                        <div class="form-group{{ $errors->has('distributionId') ? ' has-error' : '' }}">
-                                            <label for="distributionId" class="col-md-3 control-label">分销商：</label>
+                                    <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                                        <label for="type" class="col-md-3 control-label">帐户类型：</label>
 
-                                            <div class="col-md-9">
-                                                <select name="distributionId" class="form-control" style="width: auto;">
-                                                    @foreach($distributions as $item)
-                                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                        <div class="col-md-9">
+                                            <select id="type" name="type" class="form-control" style="width: auto;">
+                                                <option value="0">银行帐户</option>
+                                                <option value="1">微信</option>
+                                                <option value="2">支付宝</option>
+                                                <option value="3">线下</option>
+                                                <option value="4">其它</option>
+                                            </select>
 
-                                                @if ($errors->has('distributionId'))
-                                                    <span class="help-block">
-                                        <strong>{{ $errors->first('distributionId') }}</strong>
+                                            @if ($errors->has('type'))
+                                                <span class="help-block">
+                                        <strong>{{ $errors->first('type') }}</strong>
                                     </span>
-                                                @endif
-                                            </div>
+                                            @endif
                                         </div>
-                                    @endif
+                                    </div>
 
 
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <label for="name" class="col-md-3 control-label">应用名称：</label>
+                                        <label for="name" class="col-md-3 control-label">开户名：</label>
 
                                         <div class="col-md-9">
                                             <input id="name" type="text" class="form-control" name="name"
@@ -97,66 +87,66 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group{{ $errors->has('appId') ? ' has-error' : '' }}">
-                                        <label for="appId" class="col-md-3 control-label">appId：</label>
+                                    <div class="form-group{{ $errors->has('bankAccount') ? ' has-error' : '' }}">
+                                        <label for="bankAccount" class="col-md-3 control-label">开户行：</label>
 
                                         <div class="col-md-9">
-                                            <input id="appId" type="text" class="form-control" name="appId"
+                                            <input id="bankAccount" type="text" class="form-control" name="bankAccount"
 
-                                                   value="{{ old('appId') }}">
+                                                   value="{{ old('bankAccount') }}">
 
-                                            @if ($errors->has('appId'))
+                                            @if ($errors->has('bankAccount'))
                                                 <span class="help-block">
-                                        <strong>{{ $errors->first('appId') }}</strong>
+                                        <strong>{{ $errors->first('bankAccount') }}</strong>
                                     </span>
                                             @endif
                                         </div>
                                     </div>
 
-                                    <div class="form-group{{ $errors->has('appSecret') ? ' has-error' : '' }}">
-                                        <label for="appSecret" class="col-md-3 control-label">appSecret：</label>
+                                    <div class="form-group{{ $errors->has('accounts') ? ' has-error' : '' }}">
+                                        <label for="accounts" class="col-md-3 control-label">帐号：</label>
 
                                         <div class="col-md-9">
-                                            <input id="appSecret" type="text" class="form-control" name="appSecret"
+                                            <input id="accounts" type="text" class="form-control" name="accounts"
 
-                                                   value="{{ old('appSecret') }}">
+                                                   value="{{ old('accounts') }}">
 
-                                            @if ($errors->has('appSecret'))
+                                            @if ($errors->has('accounts'))
                                                 <span class="help-block">
-                                        <strong>{{ $errors->first('appSecret') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group{{ $errors->has('ip') ? ' has-error' : '' }}">
-                                        <label for="ip" class="col-md-3 control-label">授信IP：</label>
-
-                                        <div class="col-md-9">
-                                            <input id="ip" type="text" class="form-control" name="ip"
-                                                   placeholder="多个IP使用逗号做分隔"
-                                                   value="{{ old('ip') }}">
-
-                                            @if ($errors->has('ip'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('ip') }}</strong>
+                                        <strong>{{ $errors->first('accounts') }}</strong>
                                     </span>
                                             @endif
                                         </div>
                                     </div>
 
 
-                                    <div class="form-group{{ $errors->has('callback') ? ' has-error' : '' }}">
-                                        <label for="callback" class="col-md-3 control-label">回调地址：</label>
+                                    <div class="form-group{{ $errors->has('bankAddres') ? ' has-error' : '' }}">
+                                        <label for="bankAddres" class="col-md-3 control-label">地址：</label>
 
                                         <div class="col-md-9">
-                                            <input id="callback" type="text" class="form-control" name="callback"
-                                                   value="{{ old('callback') }}">
+                                            <input id="bankAddres" type="text" class="form-control" name="bankAddres"
+                                                   value="{{ old('bankAddres') }}">
 
-                                            @if ($errors->has('callback'))
+                                            @if ($errors->has('bankAddres'))
                                                 <span class="help-block">
-                                        <strong>{{ $errors->first('callback') }}</strong>
+                                        <strong>{{ $errors->first('bankAddres') }}</strong>
+                                    </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group{{ $errors->has('beginMoney') ? ' has-error' : '' }}">
+                                        <label for="beginMoney" class="col-md-3 control-label">期初金额：</label>
+
+                                        <div class="col-md-9">
+                                            <input id="beginMoney" type="text" class="form-control auto"
+                                                   name="beginMoney"
+                                                   value="{{ old('beginMoney') }}">
+
+                                            @if ($errors->has('beginMoney'))
+                                                <span class="help-block">
+                                        <strong>{{ $errors->first('beginMoney') }}</strong>
                                     </span>
                                             @endif
                                         </div>
@@ -180,7 +170,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group{{ $errors->has('remark') ? ' has-error' : '' }}">
-                                        <label for="remark" class="col-md-3 control-label">内部备注：</label>
+                                        <label for="remark" class="col-md-3 control-label">备注：</label>
 
                                         <div class="col-md-9">
 

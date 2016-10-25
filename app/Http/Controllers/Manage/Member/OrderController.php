@@ -8,6 +8,7 @@ use App\Models\Member;
 use App\Models\Order;
 use App\Models\Produits;
 use App\Models\Scenic;
+use App\Models\Supplier_Resource;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -74,7 +75,7 @@ class OrderController extends Controller
     public function scenic(Request $request)
     {
         $scenicId = $request->scenicId;
-        $lists = Produits::where("scenicId", $scenicId)->get();
+        $lists = Supplier_Resource::where("scenicId", $scenicId)->get();
         return json_encode($lists);
     }
 

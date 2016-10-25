@@ -15,10 +15,10 @@
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/supplier')}}" class="active">供应商列表</a>
+                                <a href="{{url('/manage/supplier')}}" class="active">供应商</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/supplier/product')}}">原始资源</a>
+                                <a href="{{url('/manage/supplier/resource')}}">产品资源</a>
                             </li>
 
                         </ul>
@@ -27,17 +27,13 @@
                             <li>
                                 <a href="{{url('/manage/supplier/scenic')}}">景区配置</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/supplier/produits')}}">产品中心</a>
-                            </li>
-
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-md-10">
                 <div class="panel panel-info">
-                    <div class="panel-heading">资源供应列表</div>
+                    <div class="panel-heading">供应商</div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-4"><a href="{{url('/manage/supplier/create')}}"
@@ -81,7 +77,7 @@
                                                    name="id"/></td>
                                         <td style="text-align: center">{{$item->id}} </td>
                                         <td style="text-align: center">
-                                            <a href="{{url('/manage/supplier/product/'.$item->id)}}">{{$item->name}}</a>
+                                            <a href="{{url('/manage/supplier/resource/'.$item->id)}}">{{$item->name}}</a>
                                         </td>
                                         <td style="text-align: center">{{$item->enterprise}}</td>
                                         <td style="text-align: center">{{$item->linkMan}}</td>
@@ -97,10 +93,10 @@
                                             <a
                                                     href="{{url('/manage/supplier/delete/'.$item->id)}}">删除</a>
                                             <br>
-                                            <a href="{{url('/manage/supplier/product?supplierId='.$item->id)}}">供应产品({{$item->products()->count()}}
+                                            <a href="{{url('/manage/supplier/resource?supplierId='.$item->id)}}">供应产品({{$item->resources()->count()}}
                                                 )</a>
                                             |
-                                            <a href="{{url('/manage/supplier/product/sync/'.$item->id)}}">同步</a>
+                                            <a href="{{url('/manage/supplier/resource/sync/'.$item->id)}}">同步</a>
                                         </td>
                                     </tr>
                                 @endforeach

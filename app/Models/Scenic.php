@@ -10,7 +10,7 @@ class Scenic extends Model
     use SoftDeletes;
 
 
-    protected $table = "scenic";
+    protected $table = "Scenic";
     protected $primaryKey = "id";//主键
 
     protected $dates = ['deleted_at'];
@@ -53,19 +53,13 @@ class Scenic extends Model
             'name.required' => '景区名称不能为空',
         ];
     }
+
     /**
-     *景区产品
+     *资源产品
      */
-    public function product()
+    public function resources()
     {
-        return $this->hasMany('App\Models\Product', "scenicId");
-    }
-    /**
-     *景区产品
-     */
-    public function produits()
-    {
-        return $this->hasMany('App\Models\Produits', "scenicId");
+        return $this->hasMany('App\Models\Supplier_Resource', "scenicId");
     }
 
 }

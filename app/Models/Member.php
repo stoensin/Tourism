@@ -55,19 +55,11 @@ class Member extends Model
     }
 
     /**
-     * 所属分销商
-     */
-    public function distribution()
-    {
-        return $this->belongsTo('App\Models\Distribution', 'distributionId');
-    }
-
-    /**
      * 推荐人
      */
-    public function parentMember()
+    public function recommend()
     {
-        return $this->belongsTo('App\Models\Member', 'parentId');
+        return $this->belongsTo('App\Models\User', 'recommendId');
     }
 
 }

@@ -11,14 +11,13 @@
             <div class="col-md-2">
                 <div class="panel panel-primary">
                     <div class="panel-heading">资源供应</div>
-
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/supplier')}}" class="active">供应商列表</a>
+                                <a href="{{url('/manage/supplier')}}" class="active">供应商</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/supplier/product')}}">原始资源</a>
+                                <a href="{{url('/manage/supplier/resource')}}">产品资源</a>
                             </li>
 
                         </ul>
@@ -27,10 +26,6 @@
                             <li>
                                 <a href="{{url('/manage/supplier/scenic')}}">景区配置</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/supplier/produits')}}">产品中心</a>
-                            </li>
-
                         </ul>
                     </div>
                 </div>

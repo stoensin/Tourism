@@ -65,7 +65,6 @@
                                     <th><a href="">邮件</a></th>
                                     <th><a href="">手机号</a></th>
                                     <th><a href="">QQ</a></th>
-                                    <th><a href="">分销商</a></th>
                                     <th><a href="">推荐人</a></th>
                                     <th><a href="">注册时间</a></th>
                                     <th><a href="">微信绑定</a></th>
@@ -85,8 +84,7 @@
                                         <td style="text-align: center">{{$item->email}}</td>
                                         <td style="text-align: center">{{$item->mobile}}</td>
                                         <td style="text-align: center">{{$item->qq}}</td>
-                                        <td style="text-align: center">{{isset($item->distribution)? $item->distribution->name:''}}</td>
-                                        <td style="text-align: center">{{isset($item->parentMember) ? $item->parentMember->name:''}}</td>
+                                        <td style="text-align: center">{{isset($item->recommend) ? $item->recommend->name:''}}</td>
                                         <td style="text-align: center">{{$item->created_at}}</td>
                                         <td style="text-align: center">{{isset($item->openId)?'未绑定':'已绑定'}}</td>
                                         <td style="text-align: center">

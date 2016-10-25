@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Manage\Distribution;
+namespace App\Http\Controllers\Manage\Open;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apply;
 use App\Models\Distribution;
-use App\Models\Product;
+use App\Models\Open_Ota;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Validator;
  * 应用中心
  * @package App\Http\Controllers\
  */
-class ApplyController extends Controller
+class OtaController extends Controller
 {
 
     /**
@@ -26,43 +27,43 @@ class ApplyController extends Controller
     public function index(Request $request)
     {
         $key = $request->key;
-        $distributionId = $request->input('distributionId');
+        $userId = $request->input('userId');
 
-        $lists = Apply::where(function ($query) use ($key, $distributionId) {
-            if ($distributionId) {
-                $query->where('distributionId', $distributionId);
+        $lists = Open_Ota::where(function ($query) use ($key, $userId) {
+            if ($userId) {
+                $query->where('userId', $userId);
             }
             if ($key) {
                 $query->orWhere('name', 'like', '%' . $key . '%');//名称
             }
         })->orderBy('id', 'desc')->paginate($this->pageSize);
 
-        return view('manage.distribution.apply.index', compact('lists'));
+        return view('manage.open.ota.index', compact('lists'));
     }
 
     public function create(Request $request)
     {
         try {
-            $apply = new Apply();
+            $ota = new Open_Ota();
             if ($request->isMethod('POST')) {
                 $input = $request->all();
-                $validator = Validator::make($input, $apply->Rules(), $apply->messages());
+                $validator = Validator::make($input, $ota->Rules(), $ota->messages());
                 if ($validator->fails()) {
                     echo "效验失败";
-                    return redirect('/manage/distribution/apply/create')
+                    return redirect('/manage/open/ota/create')
                         ->withInput()
                         ->withErrors($validator);
                 }
 
-                $apply->fill($input);
-                $apply->save();
-                if ($apply) {
-                    return redirect('/manage/distribution/apply')->withSuccess('保存成功！');
+                $ota->fill($input);
+                $ota->save();
+                if ($ota) {
+                    return redirect('/manage/open/ota')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }
-            $distributions = Distribution::all();
-            return view('manage.distribution.apply.create', compact('apply', 'distributions'));
+            $users = User::all();
+            return view('manage.open.ota.create', compact('ota', 'users'));
 
         } catch (Exception $ex) {
             return Redirect::back()->withInput()->withErrors('异常！' . $ex->getMessage());

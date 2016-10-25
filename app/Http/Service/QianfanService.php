@@ -30,9 +30,9 @@ class QianfanService
      * 获取可销售产品
      * @return mixed
      */
-    public function getProducts()
+    public function getResources()
     {
-        $result = $this->client->getProducts();
+        $result = $this->client->getResources();
         return $result;
     }
 }

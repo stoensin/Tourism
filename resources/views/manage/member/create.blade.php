@@ -51,7 +51,7 @@
                             {{ csrf_field() }}
                             <div class="col-xs-12">
                                 <fieldset>
-                                    <legend>帐户信息</legend>
+                                    <legend>基本信息</legend>
 
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label for="name" class="col-md-3 control-label">姓名：</label>
@@ -100,25 +100,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                        <label for="email" class="col-md-3 control-label">密码：</label>
 
-                                        <div class="col-md-9">
-                                            <input id="password" type="password" class="form-control" name="password"
-                                                   style="width: auto;"
-                                                   value="{{ old('email') }}" autofocus>
-
-                                            @if ($errors->has('password'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                </fieldset>
-                                <fieldset>
-                                    <legend>基本信息</legend>
                                     <div class="form-group{{ $errors->has('idCard') ? ' has-error' : '' }}">
                                         <label for="idCard" class="col-md-3 control-label">身份证号：</label>
 
@@ -285,35 +267,17 @@
                                 </fieldset>
                                 <fieldset>
                                     <legend>渠道信息</legend>
-                                    @if($distributions )
-                                        <div class="form-group{{ $errors->has('distributionId') ? ' has-error' : '' }}">
-                                            <label for="distributionId" class="col-md-3 control-label">分销商：</label>
 
-                                            <div class="col-md-9">
-                                                <select name="distributionId" class="form-control" style="width: auto;">
-                                                    @foreach($distributions as $item)
-                                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                                    @endforeach
-                                                </select>
-
-                                                @if ($errors->has('distributionId'))
-                                                    <span class="help-block">
-                                        <strong>{{ $errors->first('distributionId') }}</strong>
-                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="form-group{{ $errors->has('memberId') ? ' has-error' : '' }}">
-                                        <label for="memberId" class="col-md-3 control-label">推荐人ID：</label>
+                                    <div class="form-group{{ $errors->has('recommendId') ? ' has-error' : '' }}">
+                                        <label for="recommendId" class="col-md-3 control-label">推荐人ID：</label>
 
                                         <div class="col-md-9">
-                                            <input id="memberId" type="text" class="form-control" name="memberId"
-                                                   value="{{ old('memberId') }}" style="width: auto;">
+                                            <input id="recommendId" type="text" class="form-control" name="recommendId"
+                                                   value="{{ old('recommendId') }}" style="width: auto;">
 
-                                            @if ($errors->has('memberId'))
+                                            @if ($errors->has('recommendId'))
                                                 <span class="help-block">
-                                        <strong>{{ $errors->first('memberId') }}</strong>
+                                        <strong>{{ $errors->first('recommendId') }}</strong>
                                     </span>
                                             @endif
                                         </div>

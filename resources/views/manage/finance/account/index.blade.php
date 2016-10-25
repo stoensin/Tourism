@@ -5,48 +5,38 @@
         <ol class="breadcrumb">
             <li><a href="#">微利分销</a></li>
             <li><a href="#">管理中心</a></li>
-            <li class="active">分销渠道</li>
+            <li class="active">财务结算</li>
         </ol>
         <div class="row">
             <div class="col-md-2">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">分销渠道</div>
+                    <div class="panel-heading">财务结算</div>
 
                     <div class="panel-body ">
                         <ul>
                             <li>
-                                <a href="{{url('/manage/distribution')}}">分销商管理</a>
+                                <a href="{{url('/manage/finance/account')}}" class="active">帐户设置</a>
                             </li>
                             <li>
-                                <a href="{{url('/manage/distribution/sales')}}">产品授权</a>
+                                <a href="{{url('/manage/finance/payments')}}">收支记录</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/credit')}}">授信管理</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/apply')}}" class="active">应用中心</a>
-                            </li>
-
                         </ul>
                         <hr/>
                         <ul>
                             <li>
-                                <a href="{{url('/manage/distribution/policy')}}">默认政策</a>
+                                <a href="{{url('/manage/finance/credit')}}" >授信管理</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/special')}}">特殊合同</a>
-                            </li>
-
                         </ul>
+
                     </div>
                 </div>
             </div>
             <div class="col-md-10">
                 <div class="panel panel-info">
-                    <div class="panel-heading">应用中心</div>
+                    <div class="panel-heading">资金帐户</div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-4"><a href="{{url('/manage/apply/create')}}"
+                            <div class="col-md-4"><a href="{{url('/manage/finance/account/create')}}"
                                                      class="btn btn-primary">新增</a></div>
                             <div class="col-md-8 text-right">
                                 <form method="get" class="form-inline">
@@ -70,14 +60,15 @@
                                     <th style="width: 20px"><input type="checkbox"
                                                                    name="CheckAll" value="Checkid"/></th>
                                     <th style="width: 60px;"><a href="">编号</a></th>
-                                    <th><a href="">分销商</a></th>
-                                    <th><a href="">应用名称</a></th>
-                                    <th style="width: 100px;"><a href="">appId</a></th>
-                                    <th style="width: 100px;"><a href="">appSecret</a></th>
-                                    <th style="width: 120px;"><a href="">授信IP</a></th>
-                                    <th style="width: 160px;"><a href="">回调地址</a></th>
+                                    <th style="width: 100px;"><a href="">帐户类型</a></th>
+                                    <th><a href="">开户名</a></th>
+                                    <th><a href="">开户行</a></th>
+                                    <th style="width: 160px;"><a href="">帐号</a></th>
+                                    <th><a href="">开户行地址</a></th>
+                                    <th style="width: 100px;"><a href="">期初金额</a></th>
+                                    <th style="width: 100px;"><a href="">余额</a></th>
                                     <th style="width: 60px;"><a href="">状态</a></th>
-                                    <th style="width: 120px;">操作</th>
+                                    <th style="width: 100px;">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -86,20 +77,31 @@
                                         <td><input type="checkbox" value="{{$item->id}} "
                                                    name="id"/></td>
                                         <td style="text-align: center">{{$item->id}} </td>
-                                        <td>{{$item->distribution->name}}</td>
+                                        <td style="text-align: center">
+                                            @if($item->type==0)
+                                                银行帐户
+                                            @elseif($item->type==1)
+                                                微信
+                                            @elseif($item->type==2)
+                                                支付宝
+                                            @elseif($item->type==3)
+                                                线下
+                                            @else
+                                                其它
+                                            @endif </td>
                                         <td style="text-align: center">{{$item->name}}</td>
-                                        <td> {{$item->appId}}
+                                        <td> {{$item->bankAccount}}
                                         </td>
-                                        <td> {{$item->appSecret}}</td>
-                                        <td style="text-align: center"> {{$item->ip}}</td>
-                                        <td> {{$item->callback}}</td>
+                                        <td> {{$item->accounts}}</td>
+                                        <td> {{$item->bankAddres}}</td>
+                                        <td style="text-align: center"> {{$item->beginMoney}}</td>
+                                        <td style="text-align: center"> {{$item->balance}}</td>
                                         <td style="text-align: center">
                                             {{$item->state==0?"正常":"禁用"}}</td>
                                         <td style="text-align: center"><a
-                                                    href="{{url('/manage/apply/edit/'.$item->id)}}">编辑</a>
+                                                    href="{{url('/manage/finance/account/edit/'.$item->id)}}">编辑</a>
                                             |
-                                            <a href="{{url('/manage/apply/delete/'.$item->id)}}">删除</a> |
-                                            <a href="{{url('/manage/apply/test/'.$item->id)}}">测试</a>
+                                            <a href="{{url('/manage/finance/account/delete/'.$item->id)}}">删除</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -110,7 +112,7 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-md-4"><a
-                                        href="{{url('/manage/apply/delete')}}"
+                                        href="{{url('/manage/finance/account/delete')}}"
                                         class="btn btn-primary">批量删除</a></div>
                             <div class="col-md-8 text-right">
                                 {!! $lists->links() !!}

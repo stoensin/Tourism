@@ -15,12 +15,12 @@ class CreateFinanceAccountTable extends Migration
     {
         Schema::create('Finance_Account', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('distributionId');//分销商ID
-            $table->float('money');//充值金额
-            $table->integer('liableId')->nullable();//责任人
-            $table->integer('type')->default(0);//充值方式0线下充值，1在线支付
-            $table->string('income');//充值方式0线下充值，1在线支付
+            $table->integer('type')->default(0);//帐户类型0银行帐户，1微信2，支付宝，3线下，4其它
+            $table->string('name');//开户名
+            $table->string('bankAccount');//开户行
+            $table->string('accounts');//帐号
+            $table->string('bankAddres');//开户行地址
+            $table->float('beginMoney');//期初金额
             $table->integer('state')->default(0);//状态0启用1禁用
             $table->integer('sort')->default(0);//排序
             $table->text('remark')->nullable();//备注

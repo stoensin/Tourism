@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Manage\Distribution;
+namespace App\Http\Controllers\Manage\Finance;
 
 use App\Http\Controllers\Controller;
-use App\Models\Credit;
+use App\Http\Facades\Base;
 use App\Models\Distribution;
+use App\Models\Finance_Credit;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -27,48 +28,47 @@ class CreditController extends Controller
     {
 
         $key = $request->key;
-        $distributionId = $request->input('distributionId');
+        $financeId = $request->input('financeId');
 
-        $lists = Credit::where(function ($query) use ($key, $distributionId) {
-            if ($distributionId) {
-                $query->where('distributionId', $distributionId);
+        $lists = Finance_Credit::where(function ($query) use ($key, $financeId) {
+            if ($financeId) {
+                $query->where('financeId', $financeId);
             }
             if ($key) {
                 $query->orWhere('name', 'like', '%' . $key . '%');//名称
             }
         })->orderBy('id', 'desc')->paginate($this->pageSize);
-        
-         
-        return view('manage.distribution.credit.index', compact('lists'));
+
+
+        return view('manage.finance.credit.index', compact('lists'));
     }
 
     public function create(Request $request)
     {
         try {
-            $credit = new Credit();
+            $credit = new Finance_Credit();
             if ($request->isMethod('POST')) {
                 $input = $request->all();
                 $validator = Validator::make($input, $credit->Rules(), $credit->messages());
                 if ($validator->fails()) {
                     echo "效验失败";
-                    return redirect('/manage/distribution/credit/create')
+                    return redirect('/manage/finance/credit/create')
                         ->withInput()
                         ->withErrors($validator);
                 }
 
                 $credit->fill($input);
+                $credit->liableId = Base::uid();
                 $credit->save();
                 if ($credit) {
-                    return redirect('/manage/distribution/credit')->withSuccess('保存成功！');
+                    return redirect('/manage/finance/credit')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }
 
             $users = User::all();
 
-            $distributions = Distribution::all();
-
-            return view('manage.distribution.credit.create', compact('credit', 'distributions', 'users'));
+            return view('manage.finance.credit.create', compact('credit', 'users'));
 
         } catch (Exception $ex) {
             return Redirect::back()->withInput()->withErrors('异常！' . $ex->getMessage());

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Manage\Finance;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apply;
+use App\Models\Finance_Account;
 use App\Models\Distribution;
 use App\Models\Product;
 use Exception;
@@ -26,47 +26,72 @@ class AccountController extends Controller
     public function index(Request $request)
     {
         $key = $request->key;
-        $distributionId = $request->input('distributionId');
 
-        $lists = Apply::where(function ($query) use ($key, $distributionId) {
-            if ($distributionId) {
-                $query->where('distributionId', $distributionId);
-            }
+        $lists = Finance_Account::where(function ($query) use ($key) {
             if ($key) {
                 $query->orWhere('name', 'like', '%' . $key . '%');//名称
             }
         })->orderBy('id', 'desc')->paginate($this->pageSize);
 
-        return view('manage.finance.apply.index', compact('lists'));
+        return view('manage.finance.account.index', compact('lists'));
     }
 
     public function create(Request $request)
     {
         try {
-            $apply = new Apply();
+            $account = new Finance_Account();
             if ($request->isMethod('POST')) {
                 $input = $request->all();
-                $validator = Validator::make($input, $apply->Rules(), $apply->messages());
+                $validator = Validator::make($input, $account->Rules(), $account->messages());
                 if ($validator->fails()) {
                     echo "效验失败";
-                    return redirect('/manage/apply/create')
+                    return redirect('/manage/finance/account/create')
                         ->withInput()
                         ->withErrors($validator);
                 }
 
-                $apply->fill($input);
-                $apply->save();
-                if ($apply) {
-                    return redirect('/manage/apply')->withSuccess('保存成功！');
+                $account->fill($input);
+                $account->save();
+                if ($account) {
+                    return redirect('/manage/finance/account')->withSuccess('保存成功！');
                 }
                 return Redirect::back()->withErrors('保存失败！');
             }
-            $distributions = Distribution::all();
-            return view('manage.apply.create', compact('apply', 'distributions'));
+            return view('manage.finance.account.create', compact('account'));
 
         } catch (Exception $ex) {
             return Redirect::back()->withInput()->withErrors('异常！' . $ex->getMessage());
         }
     }
 
+    public function edit($id, Request $request)
+    {
+        try {
+            $account = Finance_Account::find($id);
+            if (!$account) {
+                return Redirect::back()->withErrors('数据不存在！');
+            }
+            if ($request->isMethod('POST')) {
+                $input = $request->all();
+                $validator = Validator::make($input, $account->Rules(), $account->messages());
+                if ($validator->fails()) {
+                    echo "效验失败";
+                    return redirect('/manage/finance/account/create')
+                        ->withInput()
+                        ->withErrors($validator);
+                }
+
+                $account->fill($input);
+                $account->save();
+                if ($account) {
+                    return redirect('/manage/finance/account')->withSuccess('保存成功！');
+                }
+                return Redirect::back()->withErrors('保存失败！');
+            }
+            return view('manage.finance.account.edit', compact('account'));
+
+        } catch (Exception $ex) {
+            return Redirect::back()->withInput()->withErrors('异常！' . $ex->getMessage());
+        }
+    }
 }

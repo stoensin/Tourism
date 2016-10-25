@@ -20,15 +20,7 @@
                             <li>
                                 <a href="{{url('/manage/distribution/sales')}}">产品授权</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/recharge')}}">充值记录</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/credit')}}">授信管理</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/apply')}}">应用中心</a>
-                            </li>
+
 
                         </ul>
                         <hr/>
@@ -92,7 +84,7 @@
                                         <td>{{$item->name}}</td>
                                         <td style="text-align: center">{{$item->linkMan}}</td>
                                         <td> {{$item->mobile}}  </td>
-                                        <td style="text-align: center"> {{$item->credit()->sum('credit')}}</td>
+                                        <td style="text-align: center"> {{$item->credit}}</td>
                                         <td style="text-align: center"> {{$item->warningCredit}}</td>
                                         <td style="text-align: center">    {{$item->sendSms==0?"发送":"不发送"}} </td>
                                         <td style="text-align: center">
@@ -104,11 +96,11 @@
                                             <a href="{{url('/manage/distribution/delete/'.$item->id)}}">删除</a>
                                             <hr/>
                                             <a
-                                                    href="{{url('/manage/distribution/credit?distributionId='.$item->id)}}">授信</a>
+                                                    href="{{url('/manage/finance/credit?distributionId='.$item->id)}}">授信</a>
                                             | <a
                                                     href="{{url('/manage/distribution/sales?distributionId='.$item->id)}}">授权</a>
                                             | <a
-                                                    href="{{url('/manage/distribution/apply?distributionId='.$item->id)}}">应用</a>
+                                                    href="{{url('/manage/open/apply?distributionId='.$item->id)}}">应用</a>
 
 
                                         </td>

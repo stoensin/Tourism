@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Apply extends Model
+class Open_Ota extends Model
 {
     use SoftDeletes;
 
 
-    protected $table = "apply";
+    protected $table = "Open_Ota";
     protected $primaryKey = "id";//主键
 
     protected $dates = ['deleted_at'];
@@ -55,11 +55,11 @@ class Apply extends Model
     }
 
     /**
-     * 分销商
+     * 用户
      */
-    public function distribution()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Distribution', 'distributionId');
+        return $this->belongsTo('App\Models\User', 'userId');
     }
 
 

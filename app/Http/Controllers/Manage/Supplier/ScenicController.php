@@ -57,16 +57,7 @@ class ScenicController extends Controller
 
                     $pathName=$request->titlePic->store('scenic');
 
-//
-//                    $disk = Storage::disk('qiniu');
-//
-//
-//
-//                    $pathName = $disk->put('scenic', $request->file('titlePic'));
-//
                     if ($pathName) {
-//                        $picUrl = $disk->imagePreviewUrl($pathName, 'imageView2/0/w/100/h/200');
-
                         $scenic->titlePic = $pathName;
                     }
                 }
@@ -78,7 +69,7 @@ class ScenicController extends Controller
                 return Redirect::back()->withErrors('保存失败！');
             }
 
-            return view('manage.scenic.create', compact('scenic'));
+            return view('manage.supplier.scenic.create', compact('scenic'));
 
         } catch (Exception $ex) {
             return Redirect::back()->withInput()->withErrors('异常！' . $ex->getMessage());

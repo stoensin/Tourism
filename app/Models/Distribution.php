@@ -71,13 +71,6 @@ class Distribution extends Model
     }
 
 
-    /**
-     *授信记录
-     */
-    public function credit()
-    {
-        return $this->hasMany('App\Models\Credit', "distributionId");
-    }
 
 
     /**

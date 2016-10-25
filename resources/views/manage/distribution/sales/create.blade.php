@@ -20,12 +20,6 @@
                             <li>
                                 <a href="{{url('/manage/distribution/sales')}}" class="active">产品授权</a>
                             </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/credit')}}">授信管理</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/manage/distribution/apply')}}">应用中心</a>
-                            </li>
 
                         </ul>
                         <hr/>

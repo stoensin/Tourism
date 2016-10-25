@@ -13,7 +13,7 @@ class CreateDistributionTable extends Migration
      */
     public function up()
     {
-        Schema::create('distribution', function (Blueprint $table) {
+        Schema::create('Distribution', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('userId')->nullable();//用户关联
             $table->string('name');//企业名称
@@ -51,6 +51,6 @@ class CreateDistributionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('distribution');
+        Schema::drop('Distribution');
     }
 }

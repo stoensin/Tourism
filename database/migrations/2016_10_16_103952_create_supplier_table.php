@@ -13,7 +13,7 @@ class CreateSupplierTable extends Migration
      */
     public function up()
     {
-        Schema::create('supplier', function (Blueprint $table) {
+        Schema::create('Supplier', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('userId')->nullable();//关联用户
             $table->string('name');//供应商简称
@@ -44,6 +44,6 @@ class CreateSupplierTable extends Migration
      */
     public function down()
     {
-        Schema::drop('supplier');
+        Schema::drop('Supplier');
     }
 }
